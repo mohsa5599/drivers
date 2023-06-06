@@ -1,6 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:drivers/screens/car_info_screen.dart';
 
 import '../global/global.dart';
 import '../splashScreen/splash_screen.dart';
@@ -13,15 +14,13 @@ class ProfileTabPage extends StatefulWidget {
 }
 
 class _ProfileTabPageState extends State<ProfileTabPage> {
-
   final nameTextEditingController = TextEditingController();
   final phoneTextEditingController = TextEditingController();
   final addressTextEditingController = TextEditingController();
 
   DatabaseReference userRef = FirebaseDatabase.instance.ref().child("drivers");
 
-  Future<void> showDriverNameDialogAlert(BuildContext context, String name){
-
+  Future<void> showDriverNameDialogAlert(BuildContext context, String name) {
     nameTextEditingController.text = name;
 
     return showDialog(
@@ -43,31 +42,37 @@ class _ProfileTabPageState extends State<ProfileTabPage> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text("Cancel", style: TextStyle(color: Colors.red),),
+                child: Text(
+                  "Cancel",
+                  style: TextStyle(color: Colors.red),
+                ),
               ),
-
               TextButton(
                 onPressed: () {
                   userRef.child(firebaseAuth.currentUser!.uid).update({
                     "name": nameTextEditingController.text.trim(),
-                  }).then((value){
+                  }).then((value) {
                     nameTextEditingController.clear();
-                    Fluttertoast.showToast(msg: "Updated Succesfully. \n Reload the app to see the changes");
+                    Fluttertoast.showToast(
+                        msg:
+                            "Updated Succesfully. \n Reload the app to see the changes");
                   }).catchError((errorMessage) {
-                    Fluttertoast.showToast(msg: "Error Occurred. \n $errorMessage");
+                    Fluttertoast.showToast(
+                        msg: "Error Occurred. \n $errorMessage");
                   });
                   Navigator.pop(context);
                 },
-                child: Text("Ok", style: TextStyle(color: Colors.black),),
+                child: Text(
+                  "Ok",
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
             ],
           );
-        }
-    );
+        });
   }
 
-  Future<void> showDriverPhoneDialogAlert(BuildContext context, String phone){
-
+  Future<void> showDriverPhoneDialogAlert(BuildContext context, String phone) {
     phoneTextEditingController.text = phone;
 
     return showDialog(
@@ -89,31 +94,38 @@ class _ProfileTabPageState extends State<ProfileTabPage> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text("Cancel", style: TextStyle(color: Colors.red),),
+                child: Text(
+                  "Cancel",
+                  style: TextStyle(color: Colors.red),
+                ),
               ),
-
               TextButton(
                 onPressed: () {
                   userRef.child(firebaseAuth.currentUser!.uid).update({
                     "phone": phoneTextEditingController.text.trim(),
-                  }).then((value){
+                  }).then((value) {
                     phoneTextEditingController.clear();
-                    Fluttertoast.showToast(msg: "Updated Succesfully. \n Reload the app to see the changes");
+                    Fluttertoast.showToast(
+                        msg:
+                            "Updated Succesfully. \n Reload the app to see the changes");
                   }).catchError((errorMessage) {
-                    Fluttertoast.showToast(msg: "Error Occurred. \n $errorMessage");
+                    Fluttertoast.showToast(
+                        msg: "Error Occurred. \n $errorMessage");
                   });
                   Navigator.pop(context);
                 },
-                child: Text("Ok", style: TextStyle(color: Colors.black),),
+                child: Text(
+                  "Ok",
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
             ],
           );
-        }
-    );
+        });
   }
 
-  Future<void> showDriverAddressDialogAlert(BuildContext context, String address){
-
+  Future<void> showDriverAddressDialogAlert(
+      BuildContext context, String address) {
     addressTextEditingController.text = address;
 
     return showDialog(
@@ -135,33 +147,40 @@ class _ProfileTabPageState extends State<ProfileTabPage> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text("Cancel", style: TextStyle(color: Colors.red),),
+                child: Text(
+                  "Cancel",
+                  style: TextStyle(color: Colors.red),
+                ),
               ),
-
               TextButton(
                 onPressed: () {
                   userRef.child(firebaseAuth.currentUser!.uid).update({
                     "address": addressTextEditingController.text.trim(),
-                  }).then((value){
+                  }).then((value) {
                     addressTextEditingController.clear();
-                    Fluttertoast.showToast(msg: "Updated Succesfully. \n Reload the app to see the changes");
+                    Fluttertoast.showToast(
+                        msg:
+                            "Updated Succesfully. \n Reload the app to see the changes");
                   }).catchError((errorMessage) {
-                    Fluttertoast.showToast(msg: "Error Occurred. \n $errorMessage");
+                    Fluttertoast.showToast(
+                        msg: "Error Occurred. \n $errorMessage");
                   });
                   Navigator.pop(context);
                 },
-                child: Text("Ok", style: TextStyle(color: Colors.black),),
+                child: Text(
+                  "Ok",
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
             ],
           );
-        }
-    );
+        });
   }
 
   @override
   Widget build(BuildContext context) {
-
-    bool darkTheme = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    bool darkTheme =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
 
     return GestureDetector(
       onTap: () {
@@ -180,7 +199,12 @@ class _ProfileTabPageState extends State<ProfileTabPage> {
               color: darkTheme ? Colors.amber.shade400 : Colors.black,
             ),
           ),
-          title: Text("Profile Screen", style: TextStyle(color: darkTheme ? Colors.amber.shade400 : Colors.black, fontWeight: FontWeight.bold),),
+          title: Text(
+            "Profile Screen",
+            style: TextStyle(
+                color: darkTheme ? Colors.amber.shade400 : Colors.black,
+                fontWeight: FontWeight.bold),
+          ),
           centerTitle: true,
           elevation: 0.0,
         ),
@@ -195,131 +219,144 @@ class _ProfileTabPageState extends State<ProfileTabPage> {
                     Container(
                       padding: EdgeInsets.all(50),
                       decoration: BoxDecoration(
-                        color: darkTheme ? Colors.amber.shade400 : Colors.lightBlue,
+                        color: darkTheme
+                            ? Colors.amber.shade400
+                            : Colors.lightBlue,
                         shape: BoxShape.circle,
                       ),
-                      child: Icon(Icons.person, color: darkTheme ? Colors.black : Colors.white,),
+                      child: Icon(
+                        Icons.person,
+                        color: darkTheme ? Colors.black : Colors.white,
+                      ),
                     ),
-
-                    SizedBox(height: 30,),
-
+                    SizedBox(
+                      height: 30,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("${onlineDriverData.name}",
+                        Text(
+                          "${onlineDriverData.name}",
                           style: TextStyle(
-                            color: darkTheme ? Colors.amber.shade400 : Colors.blue,
+                            color:
+                                darkTheme ? Colors.amber.shade400 : Colors.blue,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-
                         IconButton(
                             onPressed: () {
-                              showDriverNameDialogAlert(context, onlineDriverData.name!);
+                              showDriverNameDialogAlert(
+                                  context, onlineDriverData.name!);
                             },
                             icon: Icon(
                               Icons.edit,
-                              color: darkTheme ? Colors.amber.shade400 : Colors.blue,
-                            )
-                        ),
+                              color: darkTheme
+                                  ? Colors.amber.shade400
+                                  : Colors.blue,
+                            )),
                       ],
                     ),
-
                     Divider(
                       thickness: 1,
                     ),
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("${onlineDriverData.phone!}",
+                        Text(
+                          "${onlineDriverData.phone!}",
                           style: TextStyle(
-                            color: darkTheme ? Colors.amber.shade400 : Colors.blue,
+                            color:
+                                darkTheme ? Colors.amber.shade400 : Colors.blue,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-
                         IconButton(
                             onPressed: () {
-                              showDriverPhoneDialogAlert(context, onlineDriverData.phone!);
+                              showDriverPhoneDialogAlert(
+                                  context, onlineDriverData.phone!);
                             },
                             icon: Icon(
                               Icons.edit,
-                              color: darkTheme ? Colors.amber.shade400 : Colors.blue,
-                            )
-                        ),
+                              color: darkTheme
+                                  ? Colors.amber.shade400
+                                  : Colors.blue,
+                            )),
                       ],
                     ),
-
                     Divider(
                       thickness: 1,
                     ),
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("${onlineDriverData.address!}",
+                        Text(
+                          "${onlineDriverData.address!}",
                           style: TextStyle(
-                            color: darkTheme ? Colors.amber.shade400 : Colors.blue,
+                            color:
+                                darkTheme ? Colors.amber.shade400 : Colors.blue,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-
                         IconButton(
                             onPressed: () {
-                              showDriverAddressDialogAlert(context, onlineDriverData.address!);
+                              showDriverAddressDialogAlert(
+                                  context, onlineDriverData.address!);
                             },
                             icon: Icon(
                               Icons.edit,
-                              color: darkTheme ? Colors.amber.shade400 : Colors.blue,
-                            )
-                        ),
+                              color: darkTheme
+                                  ? Colors.amber.shade400
+                                  : Colors.blue,
+                            )),
                       ],
                     ),
-
                     Divider(
                       thickness: 1,
                     ),
-
-                    Text("${onlineDriverData.email!}",
+                    Text(
+                      "${onlineDriverData.email!}",
                       style: TextStyle(
                         color: darkTheme ? Colors.amber.shade400 : Colors.blue,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-
-                    SizedBox(height: 20,),
-
+                    SizedBox(
+                      height: 20,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("${onlineDriverData.car_model!} \n ${onlineDriverData.car_color!} (${onlineDriverData.car_number!})",
+                        Text(
+                          "${onlineDriverData.car_model!} \n ${onlineDriverData.car_color!} (${onlineDriverData.car_number!})",
                           style: TextStyle(
-                            color: darkTheme ? Colors.amber.shade400 : Colors.blue,
+                            color:
+                                darkTheme ? Colors.amber.shade400 : Colors.blue,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-
                         Image.asset(
-                          onlineDriverData.car_type == "Car" ? "images/Car.png"
-                              : onlineDriverData.car_type == "CNG" ? "images/CNG.png"
-                              : "images/Bike.png",
+                          onlineDriverData.car_type == "Car"
+                              ? "images/Car.png"
+                              : onlineDriverData.car_type == "CNG"
+                                  ? "images/CNG.png"
+                                  : "images/Bike.png",
                           scale: 2,
                         ),
                       ],
                     ),
-
-                    SizedBox(height: 20,),
-
+                    SizedBox(
+                      height: 20,
+                    ),
                     ElevatedButton(
                       onPressed: () {
                         firebaseAuth.signOut();
-                        Navigator.push(context, MaterialPageRoute(builder: (c) => SplashScreen()));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (c) => SplashScreen()));
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.redAccent,
@@ -336,26 +373,3 @@ class _ProfileTabPageState extends State<ProfileTabPage> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

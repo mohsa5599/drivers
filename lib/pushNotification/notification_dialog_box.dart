@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class NotificationDialogBox extends StatefulWidget {
-
   UserRideRequestInformation? userRideRequestDetails;
 
   NotificationDialogBox({this.userRideRequestDetails});
@@ -20,8 +19,8 @@ class NotificationDialogBox extends StatefulWidget {
 class _NotificationDialogBoxState extends State<NotificationDialogBox> {
   @override
   Widget build(BuildContext context) {
-
-    bool darkTheme = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    bool darkTheme =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
 
     return Dialog(
       shape: RoundedRectangleBorder(
@@ -39,16 +38,22 @@ class _NotificationDialogBoxState extends State<NotificationDialogBox> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset(
-              onlineDriverData.car_type == "Car" ? "images/Car.png"
-                  : onlineDriverData.car_type == "CNG" ? "images/CNG.png"
-                  : "images/Bike.png",
-            ),
+            // Image.asset(
+            //   onlineDriverData.car_type == "Car"
+            //       ? "images/Car.png"
+            //       : onlineDriverData.car_type == "CNG"
+            //           ? "images/CNG.png"
+            //           : "images/Bike.png",
+            //   scale: 2,
+            // ),
 
-            SizedBox(height: 10,),
+            // SizedBox(
+            //   height: 10,
+            // ),
 
             //title
-            Text("New Ride Request",
+            Text(
+              "New Ride Request",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 22,
@@ -56,7 +61,9 @@ class _NotificationDialogBoxState extends State<NotificationDialogBox> {
               ),
             ),
 
-            SizedBox(height: 14,),
+            SizedBox(
+              height: 14,
+            ),
 
             Divider(
               height: 2,
@@ -70,55 +77,57 @@ class _NotificationDialogBoxState extends State<NotificationDialogBox> {
                 children: [
                   Row(
                     children: [
-                      Image.asset("images/origin.png",
+                      Image.asset(
+                        "images/origin.png",
                         width: 30,
                         height: 30,
                       ),
-
-                      SizedBox(width: 10,),
-
+                      SizedBox(
+                        width: 10,
+                      ),
                       Expanded(
                         child: Container(
                           child: Text(
                             widget.userRideRequestDetails!.originAddress!,
                             style: TextStyle(
                               fontSize: 16,
-                              color: darkTheme ? Colors.amber.shade400 : Colors.blue,
+                              color: darkTheme
+                                  ? Colors.amber.shade400
+                                  : Colors.blue,
                             ),
                           ),
                         ),
                       )
                     ],
                   ),
-
-                  SizedBox(height: 20,),
-
-
-                  Row(
-                    children: [
-                      Image.asset("images/destination.png",
-                        width: 30,
-                        height: 30,
-                      ),
-
-                      SizedBox(width: 10,),
-
-                      Expanded(
-                        child: Container(
-                          child: Text(
-                            widget.userRideRequestDetails!.destinationAddress!,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: darkTheme ? Colors.amber.shade400 : Colors.blue,
-                            ),
-                          ),
-                        ),
-                      )
-
-                    ],
-                  )
-
-
+                  SizedBox(
+                    height: 20,
+                  ),
+                  // Row(
+                  //   children: [
+                  //     Image.asset(
+                  //       "images/destination.png",
+                  //       width: 30,
+                  //       height: 30,
+                  //     ),
+                  //     SizedBox(
+                  //       width: 10,
+                  //     ),
+                  //     Expanded(
+                  //       child: Container(
+                  //         child: Text(
+                  //           widget.userRideRequestDetails!.destinationAddress!,
+                  //           style: TextStyle(
+                  //             fontSize: 16,
+                  //             color: darkTheme
+                  //                 ? Colors.amber.shade400
+                  //                 : Colors.blue,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     )
+                  //   ],
+                  // )
                 ],
               ),
             ),
@@ -136,92 +145,79 @@ class _NotificationDialogBoxState extends State<NotificationDialogBox> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
-                    onPressed: () {
-                      audioPlayer.pause();
-                      audioPlayer.stop();
-                      audioPlayer = AssetsAudioPlayer();
+                      onPressed: () {
+                        audioPlayer.pause();
+                        audioPlayer.stop();
+                        audioPlayer = AssetsAudioPlayer();
 
-                      Navigator.pop(context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.red,
-                    ),
-                    child: Text(
-                      "Cancel".toUpperCase(),
-                      style: TextStyle(
-                        fontSize: 15,
+                        Navigator.pop(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.red,
                       ),
-                    )
+                      child: Text(
+                        "Cancel".toUpperCase(),
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
+                      )),
+                  SizedBox(
+                    width: 20,
                   ),
-
-                  SizedBox(width: 20,),
-
                   ElevatedButton(
-                    onPressed: () {
-                      audioPlayer.pause();
-                      audioPlayer.stop();
-                      audioPlayer = AssetsAudioPlayer();
+                      onPressed: () {
+                        audioPlayer.pause();
+                        audioPlayer.stop();
+                        audioPlayer = AssetsAudioPlayer();
 
-                      acceptRideRequest(context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.green,
-                    ),
-                    child: Text(
-                      "Accept".toUpperCase(),
-                      style: TextStyle(
-                        fontSize: 15,
+                        acceptRideRequest(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.green,
                       ),
-                    )
-                  )
+                      child: Text(
+                        "Accept".toUpperCase(),
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
+                      ))
                 ],
               ),
             )
-
           ],
         ),
       ),
     );
   }
 
-  acceptRideRequest(BuildContext context){
-
-    FirebaseDatabase.instance.ref()
+  acceptRideRequest(BuildContext context) {
+    FirebaseDatabase.instance
+        .ref()
         .child("drivers")
         .child(firebaseAuth.currentUser!.uid)
         .child("newRideStatus")
         .once()
-        .then((snap)
-    {
-      if(snap.snapshot.value == "idle"){
-        FirebaseDatabase.instance.ref().child("drivers").child(firebaseAuth.currentUser!.uid).child("newRideStatus").set("accepted");
+        .then((snap) {
+      if (snap.snapshot.value == "idle") {
+        FirebaseDatabase.instance
+            .ref()
+            .child("drivers")
+            .child(firebaseAuth.currentUser!.uid)
+            .child("newRideStatus")
+            .set("accepted");
 
         AssistantMethods.pauseLiveLocationUpdates();
 
         //trip started now - send driver to new tripScreen
-        Navigator.push(context, MaterialPageRoute(builder: (c) => NewTripScreen(
-          userRideRequestDetails: widget.userRideRequestDetails,
-        )));
-      }
-      else {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (c) => NewTripScreen(
+                      userRideRequestDetails: widget.userRideRequestDetails,
+                    )));
+      } else {
         Fluttertoast.showToast(msg: "This Ride Request do not exists.");
       }
     });
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

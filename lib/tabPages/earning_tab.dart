@@ -15,8 +15,8 @@ class EarningsTabPage extends StatefulWidget {
 class _EarningsTabPageState extends State<EarningsTabPage> {
   @override
   Widget build(BuildContext context) {
-
-    bool darkTheme = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    bool darkTheme =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
 
     return Container(
       color: darkTheme ? Colors.amberAccent : Colors.lightBlueAccent,
@@ -37,11 +37,13 @@ class _EarningsTabPageState extends State<EarningsTabPage> {
                       fontSize: 16,
                     ),
                   ),
-
-                  const SizedBox(height: 10,),
-
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Text(
-                    " " + Provider.of<AppInfo>(context, listen: false).driverTotalEarnings,
+                    " " +
+                        Provider.of<AppInfo>(context, listen: false)
+                            .driverTotalEarnings,
                     style: TextStyle(
                       color: darkTheme ? Colors.amber.shade400 : Colors.white,
                       fontSize: 60,
@@ -55,51 +57,51 @@ class _EarningsTabPageState extends State<EarningsTabPage> {
 
           //Total Number of trips
           ElevatedButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (c)=> TripsHistoryScreen()));
-            },
-            style: ElevatedButton.styleFrom(
-                primary: Colors.white54
-            ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              child: Row(
-                children: [
-                  Image.asset(
-                    onlineDriverData.car_type == "Car" ? "images/Car.png"
-                        : onlineDriverData.car_type == "CNG" ? "images/CNG.png"
-                        : "images/Bike.png",
-                    scale: 2,
-                  ),
-
-                  SizedBox(width: 10,),
-
-                  Text(
-                    "Trips Completed",
-                    style: TextStyle(
-                      color: Colors.black54,
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (c) => TripsHistoryScreen()));
+              },
+              style: ElevatedButton.styleFrom(primary: Colors.white54),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      onlineDriverData.car_type == "Car"
+                          ? "images/Car.png"
+                          : onlineDriverData.car_type == "CNG"
+                              ? "images/CNG.png"
+                              : "images/Bike.png",
+                      scale: 2,
                     ),
-                  ),
-
-                  Expanded(
-                    child: Container(
-                      child: Text(
-                        Provider.of<AppInfo>(context, listen: false).allTripsHistoryInformationList.length.toString(),
-                        textAlign: TextAlign.end,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "Trips Completed",
+                      style: TextStyle(
+                        color: Colors.black54,
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        child: Text(
+                          Provider.of<AppInfo>(context, listen: false)
+                              .allTripsHistoryInformationList
+                              .length
+                              .toString(),
+                          textAlign: TextAlign.end,
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-
-                ],
-              ),
-            )
-          )
-
+                  ],
+                ),
+              ))
         ],
       ),
     );
